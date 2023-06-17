@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useBooksData } from '../context/dataContext';
 
-const BookCard = ({ book, moveToAnotherCategory }) => {
+const BookCard = ({ book, books, category }) => {
     const { id, title, author, image } = book;
     const [showDropDown, setShowDropDOwn] = useState(false);
+    const { moveToAnotherCategory } = useBooksData()
 
     return (
         <div className="flex flex-col relative border-2 p-5 shadow-xl rounded-2xl">
@@ -22,22 +24,22 @@ const BookCard = ({ book, moveToAnotherCategory }) => {
                 <div className="absolute top-2/4 right-2.5 bg-gray-200 py-3 border-2 rounded-lg flex flex-col gap-1">
                     <p
                         className=" px-5  text-md hover:bg-sky-400 font-semibold hover:cursor-pointer "
-                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book)}>
+                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book, books, category)}>
                         Currently Reading
                     </p>
                     <p
                         className=" px-5 py-1 text-md hover:bg-sky-400 font-semibold hover:cursor-pointer "
-                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book)}>
+                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book, books, category)}>
                         Want to Read
                     </p>
                     <p
                         className=" px-5 py-1 text-md hover:bg-sky-400 font-semibold hover:cursor-pointer "
-                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book)}>
+                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book, books, category)}>
                         Read
                     </p>
                     <p
                         className="  px-5  text-md hover:bg-sky-400 font-semibold hover:cursor-pointer "
-                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book)}>
+                        onClick={e => moveToAnotherCategory(e.target.innerText, id, book, books, category)}>
                         none
                     </p>
                 </div>}

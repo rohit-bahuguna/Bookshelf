@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import BookCard from './BookCard'
+import { useBooksData } from '../context/dataContext'
 
 const BookSelfCard = ({ bookSelf, updateBookStore }) => {
     const { id, books, category } = bookSelf
-    const moveToAnotherCategory = (newcategory, bookId, PreviousBooks) => {
-        const newBooks = books.filter(({ id }) => id !== bookId);
-        //console.log(newBooks);
-        updateBookStore(newcategory, category, newBooks, PreviousBooks)
-    }
+    const { moveToAnotherCategory } = useBooksData()
     return (
         <div className='flex flex-col '>
             <h1 className='text-3xl font-bold text-indigo-500 py-2  w-fit'>{category}</h1>
@@ -15,7 +12,7 @@ const BookSelfCard = ({ bookSelf, updateBookStore }) => {
                 {
                     books.length > 0 ? books.map(((book) => {
                         return (
-                            <BookCard key={book.id} book={book} moveToAnotherCategory={moveToAnotherCategory} />
+                            <BookCard key={book.id} book={book} category={books} books={books} />
                         )
                     })) :
                         <p className=' text-xl'>There is no book in this section</p>
